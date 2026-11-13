@@ -1,0 +1,966 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\renewcommand{\bfdefault}{m}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{remark}{Remark}{Remarks}
+\newcommand{\T}{\mathbb T}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\E}{\mathbb E}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\F}{\mathcal F}
+\newcommand{\ind}{1}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\ellTwo}{\ell^2}
+\newcommand{\tr}{\operatorname{tr}}
+\numberwithin{equation}{section}
+\title[Triangular systems with transport noise]{Global solutions of stochastic reaction-diffusion systems with triangular structure and species-dependent transport noise}
+\author{Yitzchak Shmalo}
+\address{The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+\date{}
+\subjclass[2020]{60H15, 35K57, 35B44, 35B45}
+\keywords{Stochastic reaction-diffusion systems, triangular structure, transport noise, polynomial energy, nonexplosion}
+\begin{document}
+\begin{abstract}
+We prove almost-sure global existence and pathwise uniqueness for positive
+stochastic reaction-diffusion systems on the torus with linear triangular
+reaction control and globally Lipschitz zero-order noise. The transport
+coefficients may differ between species and have arbitrary positive H\"older
+regularity, subject to uniform stochastic parabolicity and the hypotheses
+of the local solution theory. The energy construction follows the mixed
+multinomial method for deterministic systems. A choice of its coefficients
+controls the full stochastic covariance form, including correlations between
+different species. A stopped estimate from positive times and a
+maximal-regularity blow-up criterion give nonexplosion without a moment
+assumption on the initial datum. This answers Problem~7 of
+Agresti--Veraar's survey on the torus for Lipschitz zero-order noise and
+the specified local-theory data classes.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+Let $d\geq2$ be the spatial dimension and let $\ell\geq2$ be the number
+of species. On the unit torus $\T^d=(\R/\mathbb Z)^d$ we consider the
+It\^o system
+\begin{equation}\label{eq:system}
+\begin{split}
+\dd u_i&=[\nu_i\Delta u_i+f_i(u)]\dd t
+ +\sum_{n\geq1}\bigl[b_{n,i}(x)\cdot\nabla u_i+g_{n,i}(u)\bigr]\dd W^n_t,
+ \\ u_i(0)&=u_{0,i},\qquad i=1,\ldots,\ell.
+\end{split}
+\end{equation}
+Here $\nu_i>0$, the $W^n$ are independent real Brownian motions, and
+$g_i=(g_{n,i})_{n\geq1}$ takes values in the sequence space $\ellTwo$. The Brownian motions
+in the transport and zero-order terms are the same, so their covariance
+must be retained. The transport acts separately on each species; reactions
+and zero-order noise may couple all species.
+
+The question is Problem~7 of Agresti--Veraar
+\cite[p.~131]{AVsurvey}, with equation (8.14) on p.~96. In arXiv
+version~5 the corresponding locations are pp.~93 and~69. Under
+quasi-positivity, polynomial reaction growth, affine mass control, linear
+triangular control, and Lipschitz zero-order noise vanishing on each
+coordinate face, it asks for global well-posedness with transport noise.
+We answer the torus case by proving almost-sure nonexplosion of the
+maximal prescribed-basis local strong solution. The admissible Besov trace
+spaces are specified below. No common-transport, divergence-free, or
+smallness assumption is imposed. A one-dimensional consequence uses the
+two-dimensional local theory through a dummy periodic variable.
+
+The deterministic triangular theory is developed by Morgan
+\cite{Morgan89,Morgan90} and presented in Pierre's survey
+\cite[Theorem~3.5]{Pierre}. Morgan--Tang
+\cite[Theorem~1.1, p.~4 of the arXiv text]{MT} treat quadratic
+intermediate sums in two dimensions, with arbitrary polynomial individual
+reactions; their higher-dimensional results use restrictions on the
+diffusion coefficients. Fellner--Morgan--Tang
+\cite[Theorem~1.1, p.~2]{FMT} establish deterministic global classical
+solutions under mass control and slightly superquadratic growth in
+arbitrary dimension, both on $\R^d$ and on smooth bounded domains with
+homogeneous Neumann conditions, as specified in their Assumption~(A1),
+p.~1. These are different structural routes to global existence.
+
+The mixed polynomial energy used here follows the deterministic method of
+Fitzgibbon--Morgan--Tang--Yin \cite{FMTY}. Their equations (2.9)--(2.10),
+p.~13 of arXiv:2103.16863v2, use mixed multinomial energies with
+coefficients $\prod_i\theta_i^{\alpha_i^2}$, where $\alpha$ is a
+multi-index and $\theta_i>0$ are weights. Their Lemma~2.4, p.~14,
+provides reaction compatibility, and pp.~15--16 establish coercivity for
+unequal diffusion operators. We use a common quadratic exponent together
+with linear weights in the multi-index. The additional estimate here
+controls the stochastic covariance for species-dependent transport; it
+then yields the stochastic global-existence conclusion.
+
+Agresti--Veraar's local theory \cite{AVlocal} supplies existence,
+regularization, positivity, and flexible blow-up criteria. Their global
+theory \cite[Assumption~3.1 and Theorem~3.2, p.~10]{AVglobal} applies
+under a coercivity condition for a weighted sum of component energies and includes
+predator--prey and Brusselator systems under further model assumptions.
+Those hypotheses do not supply the general triangular estimate used
+here. For zero-order multiplicative noise without a transport derivative,
+Milesis--Salins \cite[Theorem~5.2, p.~31]{MS} prove a triangular
+global-existence theorem on bounded domains with Dirichlet or Neumann
+conditions and suitable spatial covariance. Agresti
+\cite[Theorems~3.5--3.6, pp.~12--13]{Agresti} selects transport noise
+to obtain delayed blow-up with high probability, and high-probability
+global existence under decreasing mass. Agresti--Kniely--Tang
+\cite[Theorem~3.4, p.~15]{AKT} obtain high-probability global classical
+solutions for suitably chosen transport noise in complex-balanced
+reaction networks without boundary equilibria. Selecting noise for a
+prescribed probability tolerance does not establish almost-sure
+globality for arbitrary fixed admissible transport.
+
+The proof uses one sufficiently large finite polynomial degree. Backward
+linear weights put the polynomial gradient in the cone generated by the
+rows of the triangular matrix. A common quadratic weight makes all
+normalized off-diagonal Hessian entries small. Uniform stochastic
+parabolicity then controls diffusion minus the full leading It\^o
+correction, while face vanishing and Lipschitz continuity bound the
+remaining noise terms by the energy. Localization at a deterministic
+positive time gives a nonnegative supermartingale estimate. Its tail
+bound rules out bounded-time explosion by the local theory's Lebesgue
+blow-up criterion.
+
+\section{Setting and hypotheses}\label{sec:setting}
+
+Fix a complete probability space $(\Omega,\F,\PP)$ with a filtration
+$(\F_t)_{t\geq0}$ satisfying the usual conditions, and let $(W^n)_{n\geq1}$
+be independent standard Brownian motions adapted to it. All stochastic
+integrals below are It\^o integrals on this fixed basis. Spatial measure
+on $\T^d$ is normalized to have total mass one. The symbol $|\cdot|$
+denotes the Euclidean norm and $y\geq0$ means componentwise
+nonnegativity. For an event $A$, $\ind_A$ denotes its indicator.
+Write $S(y)=\sum_{i=1}^\ell y_i$ for $y\geq0$.
+
+We impose the following hypotheses, corresponding to the six conditions
+of Problem~7 and the periodic local theory in
+\cite[Assumption~8.4, pp.~97--98]{AVsurvey}.
+\begin{enumerate}
+\item The deterministic vector fields
+$(b_{n,i})_{n\geq1}$ belong to
+$C^\gamma(\T^d;\ellTwo(\N;\R^d))$ for some $\gamma>0$ and each $i$.
+There is a constant $\mu>0$ such that, for all $x\in\T^d$, $\xi\in\R^d$,
+and $i$,
+\begin{equation}\label{eq:parabolicity}
+2\nu_i|\xi|^2-\sum_{n\geq1}|b_{n,i}(x)\cdot\xi|^2
+ \geq\mu|\xi|^2.
+\end{equation}
+\item For a fixed $h>1$, the functions $f_i:[0,\infty)^\ell\to\R$ satisfy
+\begin{equation}\label{eq:reaction-growth}
+|f_i(y)-f_i(z)|\leq C_f(1+|y|^{h-1}+|z|^{h-1})|y-z|,
+ \qquad y,z\geq0,
+\end{equation}
+and $f_i(y)\geq0$ when $y_i=0$.
+\item The maps $g_i:\R^\ell\to\ellTwo$ are globally Lipschitz, with
+constants $L_i$, and $g_i(y)=0$ whenever $y\geq0$ and $y_i=0$.
+\item There are $K_0,K_1\geq0$ such that
+\begin{equation}\label{eq:mass}
+\sum_i f_i(y)\leq K_0+K_1S(y),\qquad y\geq0.
+\end{equation}
+\item There are an invertible lower triangular matrix
+$R=(R_{ij})_{1\leq i,j\leq\ell}$ with nonnegative entries and a vector
+$r\in\R^\ell$ such that
+\begin{equation}\label{eq:triangular}
+Rf(y)\leq (1+S(y))r,\qquad y\geq0.
+\end{equation}
+\end{enumerate}
+The right side of \eqref{eq:triangular} is multiplication by a vector;
+there is no triangular growth exponent. The diagonal entries of $R$
+are positive. The mass condition \eqref{eq:mass} is retained to match
+Problem~7; the energy argument below needs only
+\eqref{eq:triangular} for its reaction estimate.
+
+For use in the local theory extend $f$ to $\R^\ell$ by $f(y^+)$,
+where $y_i^+=\max\{y_i,0\}$. One may also replace $g_i(y)$ outside the
+nonnegative cone by $g_i(y^+)$. These extensions satisfy the required
+polynomial Lipschitz bounds on all of $\R^\ell$. Positivity makes the
+result independent of the choice of extensions. All values at zero are
+finite, and $g_i(0)=0$.
+
+Condition \eqref{eq:parabolicity} is the stochastic parabolicity condition
+of \cite[Assumption~2.1(3), p.~7]{AVlocal}, with diffusion
+$a_i=\nu_i I$ and ellipticity residual $\mu/2$. It is also the condition
+used here when applying the survey's periodic results. For spatially
+constant coefficients the effective dissipation of a Fourier mode $k$
+is proportional to
+$2\nu_i|k|^2-\sum_n|b_{n,i}\cdot k|^2$, which fixes the sign.
+
+For $s\in\R$ and $q,p\in[2,\infty)$, let $H^{s,q}$ be the Bessel
+potential space and $B^s_{q,p}$ the inhomogeneous Besov space on $\T^d$
+with values in $\R^\ell$. We use the case-(i) parameter range of
+\cite[Assumption~8.4]{AVsurvey}. Namely,
+\begin{equation}\label{eq:parameters}
+\begin{gathered}
+p>2,\quad q\in[2,\infty),\quad
+1\leq\delta<\frac{h+1}{h},\quad \delta-1<\gamma,
+\quad 0\leq\kappa<\frac p2-1,\\
+\frac{1+\kappa}{p}+\frac12\left(\delta+\frac dq\right)
+ =\frac h{h-1},\qquad
+\frac d{d-\delta}<q<\frac{d(h-1)}{h+1-\delta(h-1)}.
+\end{gathered}
+\end{equation}
+In particular $d-\delta>0$. Let
+\begin{equation}\label{eq:trace}
+\beta=\frac dq-\frac2{h-1},\qquad
+X_0=H^{-\delta,q},\quad X_1=H^{2-\delta,q},\quad
+X_{\rm tr}=B^\beta_{q,p}.
+\end{equation}
+The equality in \eqref{eq:parameters} gives
+$\beta=2-\delta-2(1+\kappa)/p$, the weighted trace smoothness.
+The initial datum belongs to
+$L^0_{\F_0}(\Omega;X_{\rm tr})$, meaning an $\F_0$-measurable random
+variable with values in this space, without an integrability condition
+in $\Omega$. If its smoothness is negative, nonnegativity means that
+each component is a nonnegative distribution.
+
+A local strong solution is the adapted maximal-regularity solution of
+\cite[Definitions~4.5--4.6, pp.~41--42]{AVsurvey}, equivalently
+\cite[Definition~2.3, p.~8]{AVlocal} in this setting. It satisfies the
+integrated equation in $X_0$, driven by the specified Brownian motions,
+up to a lifetime $\sigma$, and an increasing sequence of stopping times
+exhausting $\sigma$. Its trajectories satisfy
+\begin{equation}\label{eq:local-class}
+u\in L^p_{\rm loc}([0,\sigma),t^\kappa\dd t;X_1)
+ \cap C([0,\sigma);X_{\rm tr})\quad\hbox{almost surely}.
+\end{equation}
+Here local membership is understood on those stochastic intervals.
+The word strong includes adaptation and the integral identity on the
+given basis; it does not assert classical second spatial derivatives.
+
+\pagebreak[3]
+\begin{theorem}\label{thm:main}
+Assume \eqref{eq:parabolicity}--\eqref{eq:triangular} and the coefficient
+hypotheses above, and let \eqref{eq:parameters} hold. For every
+nonnegative $u_0\in L^0_{\F_0}(\Omega;B^\beta_{q,p})$, the unique maximal
+local strong solution $(u,\sigma)$ of \eqref{eq:system} satisfies
+$\PP(\sigma=\infty)=1$. It is nonnegative and pathwise unique in its
+local solution class. It retains \eqref{eq:local-class} on every finite
+interval and, for every $a\in(2,\infty)$ and $\theta\in(0,1)$,
+\begin{equation}\label{eq:regularization}
+u\in L^a_{\rm loc}((0,\infty);H^{1,a})
+ \cap C^{\theta/2,\theta}_{\rm loc}((0,\infty)\times\T^d;\R^\ell)
+ \quad\hbox{almost surely}.
+\end{equation}
+The transport coefficients may be arbitrary fixed species-dependent
+coefficients satisfying the stated assumptions.
+\end{theorem}
+
+There is no additional upper bound on the finite polynomial order $h$
+from the global argument. The parameter restrictions specify which
+local trace realization is used. For any given finite growth order one
+may use an upper growth order $\widehat h>\max\{h,1+4/d\}$ and choose
+$q=d(\widehat h-1)/2>2$, $\delta>1$ sufficiently close to one, and
+$p$ sufficiently large. Then $\kappa=p(1-\delta/2)-1$ is admissible.
+For $p>q$, the inclusion $L^q\subseteq B^0_{q,p}$ includes all
+nonnegative $L^q$ data, hence bounded nonnegative data. This changes the
+declared time-zero class; it is not a change of parameters imposed on
+the initial datum in \cref{thm:main}.
+
+\section{A polynomial energy adapted to the triangular structure}
+
+Fix an integer $m\geq2$. It is an energy degree, independent of $p$.
+For a multi-index $\alpha=(\alpha_1,\ldots,\alpha_\ell)\in\N_0^\ell$,
+write $|\alpha|=\sum_i\alpha_i$,
+$y^\alpha=\prod_i y_i^{\alpha_i}$, and
+$\binom m\alpha=m!/\prod_i\alpha_i!$ when $|\alpha|=m$.
+The vector $e_i$ is the $i$th coordinate vector in $\R^\ell$.
+All polynomial identities use $0^0=1$.
+
+Choose $\vartheta>1$; its size will be fixed in the next section.
+Define positive linear weights backwards by
+\begin{equation}\label{eq:weights}
+t_\ell=1,\qquad
+t_i=\vartheta^{2(m-1)}
+ \left(1+\sum_{j>i}\frac{R_{ji}}{R_{jj}}t_j\right)
+ \quad(i=\ell-1,\ldots,1).
+\end{equation}
+Set
+\begin{equation}\label{eq:polynomial}
+c_\alpha=\vartheta^{\sum_i\alpha_i^2}t^\alpha,
+\qquad
+\Phi_m(y)=\sum_{|\alpha|=m}\binom m\alpha c_\alpha y^\alpha.
+\end{equation}
+This is a homogeneous polynomial of degree $m$. Let
+$a_m=\min_{|\alpha|=m}c_\alpha$ and
+$A_m=\max_{|\alpha|=m}c_\alpha$. The multinomial theorem gives
+\begin{equation}\label{eq:equivalence}
+0<a_m S(y)^m\leq\Phi_m(y)\leq A_m S(y)^m\quad(y\geq0,\ y\ne0).
+\end{equation}
+Both non-strict bounds hold also at zero. No uniformity in $m$ is needed.
+
+\begin{lemma}[Reaction compatibility]\label{lem:reaction}
+There is a vector $\lambda(y)$ of nonnegative homogeneous polynomials
+of degree $m-1$ such that
+$\nabla\Phi_m(y)=R^T\lambda(y)$ for $y\geq0$. Consequently,
+\begin{equation}\label{eq:reaction-energy}
+\nabla\Phi_m(y)\cdot f(y)\leq C_m(1+\Phi_m(y)),\qquad y\geq0,
+\end{equation}
+where $C_m$ is finite and depends only on the fixed coefficients and $m$.
+\end{lemma}
+\begin{proof}
+For $|\alpha|=m$ and $\alpha_i\geq1$,
+$\alpha_i\binom m\alpha=m\binom{m-1}{\alpha-e_i}$.
+Thus, with $v_{\beta,i}=c_{\beta+e_i}$,
+\begin{equation}\label{eq:gradient}
+\nabla\Phi_m(y)=m\sum_{|\beta|=m-1}\binom{m-1}\beta y^\beta v_\beta,
+\qquad
+v_{\beta,i}=\vartheta^{\sum_k\beta_k^2+1}t^\beta
+ t_i\vartheta^{2\beta_i}.
+\end{equation}
+Since $0\leq\beta_i\leq m-1$, \eqref{eq:weights} yields
+\[
+t_i\vartheta^{2\beta_i}
+ \geq\sum_{j>i}\frac{R_{ji}}{R_{jj}}t_j\vartheta^{2\beta_j}.
+\]
+Solve $R^T\eta_\beta=v_\beta$ backwards. If
+$0\leq\eta_{\beta,j}\leq v_{\beta,j}/R_{jj}$ for all $j>i$, then
+\[
+\eta_{\beta,i}
+ =\frac{v_{\beta,i}-\sum_{j>i}R_{ji}\eta_{\beta,j}}{R_{ii}}
+ \in[0,v_{\beta,i}/R_{ii}].
+\]
+This also starts the induction at $i=\ell$. Therefore
+$\lambda(y)=m\sum_{|\beta|=m-1}\binom{m-1}\beta
+y^\beta\eta_\beta$ has the required properties. In particular,
+$\sum_i\lambda_i(y)\leq C S(y)^{m-1}$.
+If $r_i^+=\max\{r_i,0\}$, \eqref{eq:triangular} gives
+\[
+\nabla\Phi_m(y)\cdot f(y)
+ \leq(1+S(y))\lambda(y)\cdot r^+
+ \leq C(1+S(y))S(y)^{m-1}.
+\]
+Now $S^{m-1}(1+S)\leq2(1+S^m)$ and
+\eqref{eq:equivalence} imply \eqref{eq:reaction-energy}.
+\end{proof}
+Let $H(y)=D^2\Phi_m(y)$. Its diagonal entries are denoted by $H_{ii}$.
+The following decomposition gives both diffusion coercivity and control
+of stochastic correlations.
+
+\begin{lemma}[Hessian structure]\label{lem:hessian}
+Put $\rho=\vartheta^{-2}\in(0,1)$. For $|\beta|=m-2$ define
+\[
+(C_\beta)_{ij}=c_{\beta+e_i+e_j},\qquad
+d_{\beta,i}=\sqrt{c_{\beta+2e_i}},\qquad
+D_\beta=\operatorname{diag}(d_{\beta,1},\ldots,d_{\beta,\ell}).
+\]
+Then
+\begin{align}
+C_\beta&=D_\beta[(1-\rho)I+\rho\iota\iota^T]D_\beta,
+ \label{eq:coefficient-matrix}\\
+H(y)&=m(m-1)\sum_{|\beta|=m-2}\binom{m-2}\beta y^\beta C_\beta,
+ \label{eq:hessian}
+\end{align}
+where $\iota=(1,\ldots,1)^T$. On $y\geq0$ the Hessian is positive
+semidefinite, has nonnegative entries, and satisfies, for $z\in\R^\ell$,
+\begin{equation}\label{eq:hessian-bounds}
+(1-\rho)\sum_iH_{ii}z_i^2
+ \leq z^THz\leq\Lambda\sum_iH_{ii}z_i^2,
+ \qquad \Lambda=1+(\ell-1)\rho.
+\end{equation}
+Moreover, for $i\ne j$,
+\begin{equation}\label{eq:mixed-small}
+0\leq H_{ij}(y)\leq\rho\sqrt{H_{ii}(y)H_{jj}(y)}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Twice differentiating the multinomial sum gives
+\eqref{eq:hessian}, including its factor $m(m-1)$, also when $i=j$.
+For $i\ne j$, direct subtraction of exponents gives
+\[
+\sum_k(\beta+e_i+e_j)_k^2
+ -\frac12\sum_k\bigl[(\beta+2e_i)_k^2+(\beta+2e_j)_k^2\bigr]=-2.
+\]
+The powers of $t$ at these indices have equal geometric means. Hence
+$(C_\beta)_{ij}=\rho d_{\beta,i}d_{\beta,j}$, proving
+\eqref{eq:coefficient-matrix}. The eigenvalues of
+$(1-\rho)I+\rho\iota\iota^T$ are $1-\rho$ and
+$1+(\ell-1)\rho$. Apply their quadratic-form bounds after the diagonal
+congruence, and sum with the nonnegative coefficients of
+\eqref{eq:hessian}. This proves \eqref{eq:hessian-bounds}.
+Finally, Cauchy--Schwarz in the finite sum over $\beta$ proves
+\eqref{eq:mixed-small}. These arguments include the boundary of the
+nonnegative cone; for $m>2$ the Hessian vanishes at the origin.
+\end{proof}
+
+Homogeneity and nonnegative coefficients also imply
+\begin{equation}\label{eq:euler}
+\sum_i y_i\partial_i\Phi_m=m\Phi_m,\qquad
+\sum_iH_{ii}y_i^2\leq y^THy=m(m-1)\Phi_m.
+\end{equation}
+The pure monomial in species $i$ gives the useful lower bound
+\begin{equation}\label{eq:diagonal-lower}
+H_{ii}(y)\geq m(m-1)c_{me_i}y_i^{m-2}.
+\end{equation}
+Thus the mixed energy controls ordinary polynomial gradient dissipation.
+
+\section{The stochastic covariance estimate}\label{sec:covariance}
+
+Define finite constants
+\begin{equation}\label{eq:constants}
+V=\max_i\nu_i,\quad
+B=\max_i\sup_{x\in\T^d}
+ \left(\sum_n|b_{n,i}(x)|^2\right)^{1/2},\quad
+K=V+\tfrac12B^2.
+\end{equation}
+Choose $\vartheta>1$ so that
+\begin{equation}\label{eq:tuning}
+\rho K(\ell-1)\leq\frac\mu4,\qquad \rho=\vartheta^{-2}.
+\end{equation}
+This choice is independent of $m$, although the weights $t_i$ are not.
+The polynomial is chosen after the diffusion and transport coefficients.
+
+For vectors $z_i\in\R^d$, put
+$\mathcal B_i(x,z_i)=(b_{n,i}(x)\cdot z_i)_{n\geq1}\in\ellTwo$ and
+$D_y(z)=\sum_iH_{ii}(y)|z_i|^2$. Define the full leading form
+\begin{equation}\label{eq:leading-form}
+Q_{x,y}(z)=\sum_{i,j}H_{ij}(y)
+ \left[\frac{\nu_i+\nu_j}{2}z_i\cdot z_j
+ -\frac12\langle\mathcal B_i(x,z_i),\mathcal B_j(x,z_j)\rangle_{\ellTwo}
+ \right].
+\end{equation}
+
+\begin{proposition}[Mixed diffusion and covariance]\label{prop:covariance}
+For the polynomial \eqref{eq:polynomial} with \eqref{eq:tuning},
+\begin{equation}\label{eq:covariance}
+Q_{x,y}(z)\geq\frac\mu4D_y(z)
+ \qquad(x\in\T^d,\ y\geq0,\ z\in(\R^d)^\ell).
+\end{equation}
+For $B=0$ this is coercivity of the mixed diffusion form. For general
+$B$ it includes the entire leading transport covariance.
+\end{proposition}
+\begin{proof}
+The diagonal part is at least $(\mu/2)D_y(z)$ by
+\eqref{eq:parabolicity}. For $i\ne j$, Cauchy--Schwarz gives
+$|\langle\mathcal B_i,\mathcal B_j\rangle|\leq B^2|z_i||z_j|$.
+The absolute value of the coefficient in brackets in
+\eqref{eq:leading-form} is therefore at most $K|z_i||z_j|$.
+Set $a_i=\sqrt{H_{ii}(y)}|z_i|$. By \eqref{eq:mixed-small} the absolute
+off-diagonal contribution is bounded by
+\[
+\rho K\sum_{i\ne j}a_i a_j
+ \leq\rho K(\ell-1)\sum_i a_i^2.
+\]
+Here the last inequality follows from
+$(\sum_i a_i)^2\leq\ell\sum_i a_i^2$.
+Subtract this bound from the diagonal contribution and use
+\eqref{eq:tuning}. This proves \eqref{eq:covariance} with its stated
+margin. No derivative of $b_{n,i}$ occurs.
+\end{proof}
+
+The lower-order covariance is controlled by the same energy. Set
+$L=\max_iL_i$ and $N_m=m(m-1)$. Face vanishing gives, for $y\geq0$,
+\begin{equation}\label{eq:face-bound}
+\|g_i(y)\|_{\ellTwo}
+ \leq L_i|y_i|.
+\end{equation}
+Indeed, compare $y$ with the vector obtained by replacing $y_i$ by zero.
+
+\begin{lemma}[Lower-order covariance]\label{lem:lower-noise}
+For $y\geq0$ and the preceding notation,
+\begin{align}
+0\leq\sum_{i,j}H_{ij}\langle g_i(y),g_j(y)\rangle
+ &\leq\Lambda L^2N_m\Phi_m(y),\label{eq:noise-trace}\\
+\left|\sum_{i,j}H_{ij}\langle\mathcal B_i,g_j(y)\rangle\right|
+ &\leq\Lambda BL\sqrt{N_m}\,D_y(z)^{1/2}\Phi_m(y)^{1/2}.
+ \label{eq:cross-noise}
+\end{align}
+In particular, the right side of \eqref{eq:cross-noise} is at most
+\begin{equation}\label{eq:cross-young}
+\frac\mu8D_y(z)+\frac{2\Lambda^2B^2L^2N_m}{\mu}\Phi_m(y).
+\end{equation}
+\end{lemma}
+\begin{proof}
+The Hessian quadratic form extends to $\ellTwo$-valued vectors by
+summing the scalar form over $n$. By \eqref{eq:hessian-bounds},
+\eqref{eq:face-bound}, and \eqref{eq:euler},
+\[
+\sum_{i,j}H_{ij}\langle g_i,g_j\rangle
+ \leq\Lambda\sum_iH_{ii}\|g_i\|_{\ellTwo}^2
+ \leq\Lambda L^2N_m\Phi_m.
+\]
+The corresponding bound for $\mathcal B$ is $\Lambda B^2D_y(z)$.
+Cauchy--Schwarz for the positive semidefinite Hessian form gives
+\eqref{eq:cross-noise}; it remains valid when that form is degenerate.
+Finally apply $ab\leq\varepsilon a^2+b^2/(4\varepsilon)$ with
+$\varepsilon=\mu/8$. This yields \eqref{eq:cross-young}.
+\end{proof}
+
+\section{Local theory, positivity, and the blow-up criterion}\label{sec:local}
+
+We record precisely the local results needed for continuation. Page
+numbers for \cite{AVsurvey} refer to the printed article pages; the
+locators for the other papers refer to the arXiv versions listed in the
+bibliography.
+
+\begin{proposition}[Local theory]\label{prop:local}
+Under the hypotheses of \cref{thm:main}, there is a pathwise unique
+maximal local strong solution $(u,\sigma)$ with $\sigma>0$ almost surely
+and \eqref{eq:local-class}. On its lifetime it has the positive-time
+regularity
+\begin{equation}\label{eq:positive-time-reg}
+u\in L^a_{\rm loc}((0,\sigma);H^{1,a})
+ \cap C^{\theta/2,\theta}_{\rm loc}((0,\sigma)\times\T^d;\R^\ell),
+ \qquad a>2,\quad 0<\theta<1.
+\end{equation}
+It is nonnegative. If the hypotheses hold for two admissible parameter
+sets and the datum belongs to both trace spaces, the solutions and their
+maximal lifetimes agree.
+\end{proposition}
+\begin{proof}
+Existence and regularization are
+\cite[Theorem~8.6, pp.~98--99]{AVsurvey}, or
+\cite[Theorem~2.7, p.~10]{AVlocal}. To verify the coefficient assumption
+in the latter source, choose $\alpha$ with
+$\delta-1<\alpha<\min\{\gamma,1\}$ and a finite $\varrho\geq2$ so
+large that $d/\varrho<\alpha$. The embedding
+$C^\gamma\subseteq H^{\alpha,\varrho}$ on the compact torus supplies
+Assumption~2.1(2). Assumption~2.1(3) is
+\eqref{eq:parabolicity}, and its nonlinear conservative drift is zero.
+The extensions specified in \cref{sec:setting} meet the global-domain
+growth assumptions. The parameters \eqref{eq:parameters} are precisely
+the critical weighted parameters of that theorem.
+
+Positivity is \cite[Proposition~8.10, p.~100]{AVsurvey}, or
+\cite[Theorem~2.13, p.~13]{AVlocal}. Its face conditions are the
+quasi-positivity of $f_i$, vanishing of every $g_{n,i}$, and constancy
+on the face of the nonlinear conservative flux, which is zero here.
+There is no further condition of common transport or vanishing
+divergence. The sign mechanism can also be seen directly for a bounded
+variational solution. Use $f(y^+)$ and $g(y^+)$ and apply the
+negative-part It\^o formula. On $\{u_i<0\}$, $f_i(u^+)\geq0$ and
+$g_i(u^+)=0$. Thus, writing $u_i^-=\max\{-u_i,0\}$, the drift of
+$\sum_i\|u_i^-\|_2^2$ is at most
+\[
+-\sum_i\int_{\{u_i<0\}}
+ \left[2\nu_i|\nabla u_i|^2
+       -\sum_n|b_{n,i}\cdot\nabla u_i|^2\right]\dd x
+ \leq-\mu\sum_i\|\nabla u_i^-\|_2^2.
+\]
+Localization and expectation preserve zero negative part. The cited
+positivity theorem gives this conclusion also for the distributional
+initial traces under consideration. By \eqref{eq:positive-time-reg}
+the positive-time assertion is pointwise. Compatibility is
+\cite[Proposition~8.8, p.~100]{AVsurvey}, equivalently
+\cite[Proposition~3.5]{AVlocal}; its uniqueness is on the prescribed
+basis. These results yield the asserted maximal solution.
+\end{proof}
+
+\begin{proposition}[Lebesgue blow-up criterion]\label{prop:blowup}
+Let $(u,\sigma)$ be the solution in \cref{prop:local}. Suppose
+$h_0\geq\max\{h,1+4/d\}$, $p_0>2$, $\delta_0\in(1,2)$, and
+$q_0=d(h_0-1)/2$ admit a $\kappa_0$ satisfying
+\eqref{eq:parameters} with subscript zero and growth order $h_0$.
+For every $m>q_0$ and $0<s<T<\infty$,
+\begin{equation}\label{eq:blowup}
+\PP\left(s<\sigma<T,\quad
+ \sup_{s\leq t<\sigma}\|u(t)\|_{L^m}<\infty\right)=0.
+\end{equation}
+The original initial datum need not belong to the auxiliary trace space.
+\end{proposition}
+\begin{proof}
+This is \cite[Theorem~8.9(1), p.~100]{AVsurvey}, or directly
+\cite[Corollary~2.11(1), p.~12]{AVlocal}. Its auxiliary growth order
+may exceed the original one; \eqref{eq:reaction-growth} and the global
+Lipschitz condition for $g$ still satisfy that larger growth assumption.
+The original and auxiliary parameter sets need not agree. The criterion
+starts at $s>0$ and uses regularization and compatibility to transfer
+between them. It requires the strict inequality $m>q_0$ and the strict
+condition $\delta_0>1$, both retained in the statement. In particular,
+it makes no auxiliary integrability assertion at time zero.
+\end{proof}
+
+\section{Stopped energy estimates and global existence}\label{sec:global}
+
+Fix $m\geq2$ and the corresponding polynomial. For a deterministic
+$s>0$, on the event $\{s<\sigma\}$ define
+\begin{equation}\label{eq:energy-dissipation}
+E_m(t)=\int_{\T^d}\Phi_m(u(t,x))\dd x,\qquad
+D_m(t)=\int_{\T^d}\sum_i H_{ii}(u(t,x))|\nabla u_i(t,x)|^2\dd x
+\end{equation}
+for $s\leq t<\sigma$. The energy is continuous and finite there by
+\eqref{eq:positive-time-reg}. The dissipation is a nonnegative
+progressively measurable process, defined for almost every time and
+locally integrable before $\sigma$.
+
+\begin{lemma}[Localized It\^o formula]\label{lem:ito}
+On $[s,\sigma)$ the following identity holds after localization:
+\begin{equation}\label{eq:ito}
+\begin{split}
+\dd E_m={}&\left[-\int_{\T^d} Q_{x,u}(\nabla u)\dd x
+ +\int_{\T^d}\nabla\Phi_m(u)\cdot f(u)\dd x\right.\\
+&\left.\quad+\int_{\T^d}\sum_{i,j}H_{ij}(u)
+ \langle\mathcal B_i,g_j(u)\rangle\dd x
+ +\frac12\int_{\T^d}\sum_{i,j}H_{ij}(u)
+ \langle g_i(u),g_j(u)\rangle\dd x\right]\dd t+\dd M_m,
+\end{split}
+\end{equation}
+where $\mathcal B_i=(b_{n,i}\cdot\nabla u_i)_n$ and
+\begin{equation}\label{eq:martingale}
+M_m(t)=\sum_{n\geq1}\int_s^t
+ \left(\int_{\T^d}\sum_i\partial_i\Phi_m(u)
+ [b_{n,i}\cdot\nabla u_i+g_{n,i}(u)]\dd x\right)\dd W^n_r.
+\end{equation}
+The stopped stochastic integral is a square-integrable martingale.
+There is a constant $C_m<\infty$ such that
+\begin{equation}\label{eq:energy-inequality}
+\dd E_m+\frac\mu8D_m\dd t
+ \leq C_m(1+E_m)\dd t+\dd M_m.
+\end{equation}
+\end{lemma}
+\begin{proof}
+We give the localization and approximation details because only H\"older
+regularity of the transport is assumed. Let $\sigma_j$ be an increasing
+localizing sequence for the local solution with $\sigma_j\uparrow\sigma$.
+For an $\F_s$-event $\Gamma\subseteq\{s<\sigma\}$, stop after $s$
+at $\sigma_j$, at a level of $\|u(t)\|_\infty$, and at a level of
+$\int_s^t\|u(r)\|_{H^{1,2}}^2\dd r$. If $\sigma_j\leq s$ or an
+initial level is exceeded, set that stopped time equal to $s$. Outside
+$\Gamma$ also set it equal to $s$ and work with the factor $\ind_\Gamma$.
+An increasing choice of the indices and levels exhausts $[s,\sigma)$
+on $\Gamma$ by \eqref{eq:positive-time-reg}. The level times are
+stopping times: the spatial supremum is adapted and continuous before
+$\sigma$, and the integral cutoff is adapted and continuous. The event
+$\{s<\sigma\}$ is in $\F_s$.
+
+On any such interval, with levels bounded by $N$, the drift $f(u)$
+is bounded and
+\[
+G_i=(b_{n,i}\cdot\nabla u_i+g_{n,i}(u))_n
+ \in L^2(s,T;L^2(\T^d;\ellTwo)),
+\]
+with a deterministic bound depending on $N$ and $T$.
+The equation consequently holds there in the variational triple
+$H^{1,2}\subset L^2\subset H^{-1,2}$.
+Take a smooth function on $\R^\ell$ with bounded derivatives through
+order two agreeing with $\Phi_m$ on a neighborhood of the stopped
+range. It can be used in the variational It\^o formula. For completeness,
+one may obtain that formula by spatial convolution with a nonnegative
+periodic approximate identity $J_\varepsilon$. For each convolution
+parameter the equation has a smooth spatial drift. The finite-dimensional
+It\^o formula at each spatial point, followed by spatial integration and
+stochastic Fubini, gives the formula for the integral of the cutoff
+function. All these integrands are integrable under the stated cutoffs.
+
+As $\varepsilon\downarrow0$,
+$J_\varepsilon u\to u$ strongly in $L^2(s,T;H^{1,2})$ and
+$J_\varepsilon G\to G$ strongly in
+$L^2(s,T;L^2(\T^d;\ellTwo))$. The convergence also holds in
+expectation on the stopped interval by its deterministic bounds.
+The cutoff derivatives converge in measure and remain bounded. These
+facts justify the drift and covariance limits, and the martingale limit
+by the It\^o isometry. In the diffusion term one integrates by parts
+before taking the limit. Positive convolution preserves the nonnegative
+bounded range. The noise is convolved as $J_\varepsilon G$;
+one does not replace $J_\varepsilon(b\nabla u)$ by
+$b\nabla J_\varepsilon u$. Thus no spatial derivative of $b$ is needed.
+Endpoint convergence follows from the positive-time continuity.
+
+Integration by parts on the torus gives the drift contribution
+\[
+-\sum_{i,j}\int_{\T^d}\nu_iH_{ij}(u)
+  \nabla u_i\cdot\nabla u_j\dd x.
+\]
+Symmetry replaces $\nu_i$ by $(\nu_i+\nu_j)/2$. Expanding the
+quadratic variation of $\mathcal B+g$ gives
+$\tfrac12H[\mathcal B,\mathcal B]+H[\mathcal B,g]
++\tfrac12H[g,g]$. This proves \eqref{eq:ito}, including the coefficient
+one in its cross term and its sign in $Q$.
+
+The stochastic integral is well-defined with progressive integrand.
+Under the stated cutoffs, boundedness of $\nabla\Phi_m$ and
+Cauchy--Schwarz give
+\[
+\sum_n\left|\int_{\T^d}\sum_i\partial_i\Phi_m(u)G_{n,i}\dd x\right|^2
+ \leq C_N\sum_i\|G_i\|_{L^2(\ellTwo)}^2.
+\]
+Its time integral up to $T$ is bounded by $C_N(T+N)$, so the stopped
+martingale is square-integrable and has mean zero.
+Finally apply \cref{lem:reaction,prop:covariance,lem:lower-noise}.
+The cross term consumes at most $\mu D_m/8$, leaving
+\eqref{eq:energy-inequality}. For example, after enlarging the reaction
+constant in \eqref{eq:reaction-energy}, one may take
+\[
+C_m=C_{\rm reac}
+ +\frac{2\Lambda^2B^2L^2m(m-1)}\mu
+ +\frac12\Lambda L^2m(m-1).
+\]
+This constant is independent of the stopping levels and of the solution.
+\end{proof}
+
+\begin{proposition}[Positive-time tail and dissipation bounds]\label{prop:tail}
+Let $0<s<T<\infty$. For every $\Gamma\in\F_s$ contained in
+$\{s<\sigma\}$ with $E_m(s)$ bounded on $\Gamma$, and every $A>0$,
+\begin{equation}\label{eq:tail}
+\PP\left(\Gamma\cap
+ \left\{\sup_{s\leq t<\sigma\wedge T}E_m(t)>A\right\}\right)
+ \leq\frac{e^{C_m(T-s)}}{1+A}
+ \E[\ind_\Gamma(1+E_m(s))].
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:dissipation}
+\E\left[\ind_\Gamma\int_s^{\sigma\wedge T}D_m(t)\dd t\right]
+ \leq\frac8\mu e^{C_m(T-s)}
+ \E[\ind_\Gamma(1+E_m(s))].
+\end{equation}
+In particular,
+\begin{equation}\label{eq:path-bound}
+\sup_{s\leq t<\sigma\wedge T}\|u(t)\|_{L^m}<\infty
+ \quad\hbox{almost surely on }\{s<\sigma\}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Let $c=\mu/8$ and $C=C_m$. Multiplying
+\eqref{eq:energy-inequality} by the integrating factor shows that
+\begin{equation}\label{eq:supermartingale}
+Y(t)=e^{-C(t-s)}(1+E_m(t))
+ +c\int_s^t e^{-C(r-s)}D_m(r)\dd r
+\end{equation}
+is a nonnegative local supermartingale on the stochastic interval.
+More precisely, after multiplying by $\ind_\Gamma$, each exhausting
+cutoff from \cref{lem:ito} gives the usual supermartingale inequality;
+the initial value is integrable by the assumption on $\Gamma$.
+
+Stop also at the energy hitting time for level $A$. On the crossing event
+before $\sigma\wedge T$ the energy term in \eqref{eq:supermartingale}
+is at least $e^{-C(T-s)}(1+A)$. Optional stopping at the bounded time
+obtained by intersecting all these cutoffs with $T$ gives the
+corresponding probability bound. Any crossing at a time strictly below
+$\sigma\wedge T$ lies before an exhausting cutoff. Passing to their
+union gives \eqref{eq:tail}. The use of a strict supremum avoids a
+possible unattained level on the half-open interval; non-strict versions
+follow by decreasing thresholds.
+
+Alternatively discard the nonnegative energy term in the stopped
+expectation of \eqref{eq:supermartingale}. Since the exponential weight
+is at least $e^{-C(T-s)}$, Fatou's lemma through the exhausting cutoffs
+gives \eqref{eq:dissipation}. In particular this time integral is finite
+almost surely on $\Gamma$.
+
+For each integer $k\geq1$ define the $\F_s$-event
+\[
+\Gamma_k=\{s<\sigma,\ E_m(s)\leq k\}.
+\]
+Here $E_m(s)$ can be set to zero on $\{s\geq\sigma\}$.
+Letting $A\to\infty$ in \eqref{eq:tail} proves finite energy supremum
+on $\Gamma_k$. The union of these events is $\{s<\sigma\}$ up to a
+null set because \eqref{eq:positive-time-reg} makes $E_m(s)$ finite.
+Finally \eqref{eq:equivalence} gives \eqref{eq:path-bound}. Neither
+integrability of the time supremum nor a moment of $u_0$ is used.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Let $(u,\sigma)$ be the solution of \cref{prop:local}.
+Choose $h_0>\max\{h,1+4/d\}$ and set $q_0=d(h_0-1)/2>2$. There exists
+$\delta_0>1$ satisfying all of
+\begin{equation}\label{eq:auxiliary-delta}
+\delta_0-1<\gamma,\qquad
+\delta_0<\frac{h_0+1}{h_0},\qquad
+\delta_0<d-\frac2{h_0-1}.
+\end{equation}
+Each upper bound for $\delta_0$ exceeds one. For the last bound this
+uses $h_0>3$ when $d=2$; when $d\geq3$, it follows from
+$h_0>1+4/d$. The lower $q_0$ inequality in
+\eqref{eq:parameters} is equivalent to the last inequality in
+\eqref{eq:auxiliary-delta}. The denominator in its upper $q_0$ bound
+is positive, and that upper inequality is strict because
+\[
+h_0+1-\delta_0(h_0-1)<2.
+\]
+Choose $p_0$ sufficiently large and let
+$\kappa_0=p_0(1-\delta_0/2)-1$. Then
+$0\leq\kappa_0<p_0/2-1$, since $\delta_0>1$, and
+\[
+\frac{1+\kappa_0}{p_0}
+ +\frac12\left(\delta_0+\frac d{q_0}\right)
+ =1+\frac1{h_0-1}=\frac{h_0}{h_0-1}.
+\]
+Thus all auxiliary hypotheses of \cref{prop:blowup} hold. The original
+initial trace space and growth parameter are unchanged.
+
+Fix a single integer $m>q_0$ and use its polynomial energy. For any
+deterministic $0<s<T$, \eqref{eq:path-bound} implies boundedness of
+$\sup_{s\leq t<\sigma}\|u(t)\|_{L^m}$ on $\{s<\sigma<T\}$,
+almost surely. Equation \eqref{eq:blowup} therefore yields
+$\PP(s<\sigma<T)=0$. Apply this to $s=1/j$ and positive integer $T$
+with $1/j<T$. Since $\sigma>0$ almost surely, every finite positive
+lifetime belongs to one of these countably many events. Hence
+$\PP(\sigma<\infty)=0$.
+
+Positivity and \eqref{eq:regularization} follow from
+\cref{prop:local}. Pathwise uniqueness on every stopped local interval
+is part of that proposition. Exhausting the two putative lifetimes
+shows that any two global solutions on the same basis, with the same
+initial datum and Brownian motions, coincide at all times almost surely.
+The local weighted regularity on compact intervals of $[0,\sigma)$
+becomes the asserted regularity on every finite interval.
+\end{proof}
+
+\begin{corollary}[One periodic spatial variable]\label{cor:one-dimensional}
+Consider \eqref{eq:system} on $\T$, with scalar transports and the
+same reaction and noise hypotheses. Suppose
+\eqref{eq:parameters} holds with $d$ replaced by $2$, and put
+$\beta_2=2/q-2/(h-1)$. For every nonnegative datum in
+$L^0_{\F_0}(\Omega;B^{\beta_2}_{q,p}(\T;\R^\ell))$ there is a global
+positive pathwise unique solution obtained by dimension lifting.
+Its regularity is the restriction of the two-dimensional local class.
+In particular this includes bounded nonnegative data after choosing
+an upper growth order larger than $\max\{h,3\}$.
+\end{corollary}
+\begin{proof}
+Extend the initial datum and all coefficients constantly in a second
+periodic variable, and extend $b_{n,i}$ to $(b_{n,i},0)$. The
+two-dimensional parabolicity inequality holds with margin
+$\min\{\mu,2\min_i\nu_i\}>0$. Pullback by the projection onto $x_1$ is a
+bounded map between the Besov spaces of the same smoothness and
+integrability: its Fourier support lies on the axis, and the dyadic
+blocks and $L^q$ norms agree up to the fixed decomposition constants.
+Thus \cref{thm:main} applies on $\T^2$.
+
+Translations in the second variable leave the equation and datum
+unchanged. Pathwise uniqueness shows invariance under each rational
+translation, simultaneously on a probability-one event. Spatial
+continuity at positive times then gives invariance under every
+translation. The solution is therefore independent of that variable
+and restricts to the asserted solution on $\T$. This specifies the
+trace class used and makes no assertion about other one-dimensional
+trace realizations.
+\end{proof}
+
+\section{Remarks and remaining questions}
+
+\begin{remark}[Why a general mixed Hessian is insufficient]
+Componentwise stochastic parabolicity does not imply
+\eqref{eq:covariance} for every convex mixed polynomial. Take two
+species, $d=2$, $\nu_1=\nu_2=1$, one Brownian motion, and constant
+transports $b_{1,1}=e_1$, $b_{1,2}=-e_1$. These satisfy
+\eqref{eq:parabolicity} with $\mu=1$. For
+$\Phi(y)=\tfrac12(y_1+y_2)^2$, the Hessian has all entries equal
+to one. Taking $z_1=e_1$ and $z_2=-e_1$, the diffusion contribution
+to \eqref{eq:leading-form} is $|z_1+z_2|^2=0$, whereas
+\[
+\frac12\sum_{i,j}H_{ij}
+ (b_{1,i}\cdot z_i)(b_{1,j}\cdot z_j)=\frac12(1+1)^2=2.
+\]
+Thus $Q=-2$. The small normalized mixed entries of
+\cref{lem:hessian} are essential to the covariance argument.
+\end{remark}
+
+\begin{remark}[Mass control and the range of the assertion]
+The affine mass hypothesis \eqref{eq:mass} places the theorem within
+Problem~7. The proof actually establishes the same conclusion without
+that hypothesis, if the remaining assumptions, including linear
+triangular control, are retained. All energies have fixed finite degree;
+their equivalence constants may grow with the degree. No bound in
+$L^\infty$ uniform up to the lifetime is obtained by taking the degree
+to infinity. Nonexplosion follows instead from one finite $L^m$ bound
+and the strict Lebesgue blow-up criterion. The theorem asserts existence,
+positivity, and pathwise uniqueness in the stated local classes; it
+does not include a separate global continuous-dependence assertion.
+\end{remark}
+
+\begin{remark}[Other local realizations]
+The energy calculation from $s>0$ only uses nonnegativity and
+\eqref{eq:positive-time-reg}. It therefore applies to any compatible
+local realization with those properties and an appropriate blow-up
+criterion. At the Hilbert endpoint the trace supplied by
+\cite[Proposition~7.1, p.~34]{AVlocal} is $L^2$, rather than a negative
+critical Besov space in the subcritical growth range. The present main
+statement uses \eqref{eq:parameters} and its exact trace, without
+enlarging a Hilbert initial-data class by interpolation notation.
+\end{remark}
+
+\begin{remark}[Whole space and boundaries]
+The whole-space part of Problem~7 remains open here. A statement on
+$\R^d$ must specify the function spaces and behavior at infinity.
+For example, a nonzero spatially constant $f(0)$ need not preserve
+an unweighted finite-$L^q(\R^d)$ space, even starting from zero.
+This is a function-space obstruction, rather than a blow-up example.
+The finite-volume term in \eqref{eq:reaction-energy} is used in the
+torus estimate. A bounded-domain theorem with physical boundary
+conditions also remains open here: it requires a compatible positive
+local theory for the transport operator and justification of boundary
+terms in the mixed energy identity. Periodicity provides those
+cancellations in the present proof.
+\end{remark}
+
+\begin{remark}[Superlinear zero-order noise]
+The superlinear-noise follow-up to Problem~7 remains open under the
+stated triangular reaction assumptions. The closing estimate
+\eqref{eq:face-bound} uses global Lipschitz continuity. With the local
+growth allowed by Assumption~8.4(3) of \cite{AVsurvey}, the zero-order
+Hessian trace can have degree $m+h-1$, greater than $m$, and the
+triangular upper bound alone does not close
+\eqref{eq:energy-inequality}. Additional dissipative structure can
+handle superlinear noise in particular systems, as in
+\cite{AVglobal}; it is not supplied by the hypotheses here.
+\end{remark}
+
+
+\section*{Acknowledgements and funding}
+The research presented in this paper was supported by the European Research
+Council (ERC) under the European Union's Horizon Europe research and
+innovation programme (grant agreement No.~101041711), by the Simons
+Foundation as part of the Collaboration on the Mathematical and Scientific
+Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by
+the Israel Science Foundation (grant number 2258/19), and by the Israel
+Science Foundation (ISF Grant 4101/25). Computational resources were
+provided in part by Google Cloud through its education credits program
+(credit 530550103).
+
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework repository~\cite{BrainFramework}.
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and
+has a management role at Convex Nexus Capital. These entities are included
+in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+OpenAI GPT-6.1 (Codex) wrote the proofs, and an independent GPT-6.1 run
+checked them. Claude Opus~5.5 (Anthropic) set the problem, compared the
+sources and prepared the text. The author is responsible for the content
+of the paper and for decisions concerning its dissemination.
+
+\section*{Data availability}
+No data were generated or analysed for this paper. Related material is at
+\url{https://github.com/yspennstate/stochastic-reaction-diffusion-triangular-transport}.
+
+The paper is part of the Math Brain project, whose public repository is \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\begin{thebibliography}{99}
+\bibitem{Agresti} A.~Agresti, \emph{Delayed blow-up and enhanced diffusion by transport noise for systems of reaction-diffusion equations}, Stoch.\ Partial Differ.\ Equ.\ Anal.\ Comput.\ 12 (2024), 1907--1981, doi:10.1007/s40072-023-00319-4; arXiv:2207.08293v4.
+\bibitem{AKT} A.~Agresti, M.~Kniely and B.~Q.~Tang, \emph{Global classical solutions by transport noise for reaction-diffusion systems with entropy dissipation}, 2026, arXiv:2608.13332v1.
+\bibitem{AVsurvey} A.~Agresti and M.~Veraar, \emph{Nonlinear SPDEs and Maximal Regularity: An Extended Survey}, Nonlinear Differ.\ Equ.\ Appl.\ NoDEA 32 (2025), article no.~123, 150~pp., doi:10.1007/s00030-025-01090-2; arXiv:2501.18561v5.
+\bibitem{AVlocal} A.~Agresti and M.~Veraar, \emph{Reaction-diffusion equations with transport noise and critical superlinear diffusion: Local well-posedness and positivity}, J.\ Differential Equations 368 (2023), 247--300, doi:10.1016/j.jde.2023.05.038; arXiv:2209.14759v2.
+\bibitem{AVglobal} A.~Agresti and M.~Veraar, \emph{Reaction-diffusion equations with transport noise and critical superlinear diffusion: Global well-posedness of weakly dissipative systems}, SIAM J.\ Math.\ Anal.\ 56 (2024), 4870--4927, doi:10.1137/23M1562482; arXiv:2301.06897v4.
+\bibitem{FMT} K.~Fellner, J.~Morgan and B.~Q.~Tang, \emph{Global classical solutions to quadratic systems with mass control in arbitrary dimensions}, Ann.\ Inst.\ H.\ Poincar\'e C Anal.\ Non Lin\'eaire 37 (2020), 281--307, doi:10.1016/j.anihpc.2019.09.003; arXiv:1808.01315v2.
+\bibitem{FMTY} W.~E.~Fitzgibbon, J.~J.~Morgan, B.~Q.~Tang and H.-M.~Yin, \emph{Reaction-diffusion-advection systems with discontinuous diffusion and mass control}, SIAM J.\ Math.\ Anal.\ 53 (2021), 6771--6803, doi:10.1137/21M1409068; arXiv:2103.16863v2.
+\bibitem{MS} D.~Milesis and M.~Salins, \emph{Global in time solutions to stochastic reaction-diffusion systems with superlinear reactions satisfying a triangular control of mass}, 2026, arXiv:2604.06645v2.
+\bibitem{Morgan89} J.~Morgan, \emph{Global existence for semilinear parabolic systems}, SIAM J.\ Math.\ Anal.\ 20 (1989), 1128--1144, doi:10.1137/0520075.
+\bibitem{Morgan90} J.~Morgan, \emph{Boundedness and decay results for reaction-diffusion systems}, SIAM J.\ Math.\ Anal.\ 21 (1990), 1172--1189, doi:10.1137/0521064.
+\bibitem{MT} J.~Morgan and B.~Q.~Tang, \emph{Boundedness for reaction-diffusion systems with Lyapunov functions and intermediate sum conditions}, Nonlinearity 33 (2020), 3105--3133, doi:10.1088/1361-6544/ab8772; arXiv:1910.13873v1.
+\bibitem{Pierre} M.~Pierre, \emph{Global existence in reaction-diffusion systems with control of mass: a survey}, Milan J.\ Math.\ 78 (2010), 417--455, doi:10.1007/s00032-010-0133-4.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
+
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public}.
+
+\end{thebibliography}
+\end{document}
