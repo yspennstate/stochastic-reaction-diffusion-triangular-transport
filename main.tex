@@ -91,7 +91,7 @@ The deterministic triangular theory is developed by Morgan
 intermediate sums in two dimensions, with arbitrary polynomial individual
 reactions; their higher-dimensional results use restrictions on the
 diffusion coefficients. Fellner--Morgan--Tang
-\cite[Theorem~1.1, p.~2]{FMT} establish deterministic global classical
+\cite[Theorem~1.1, p.~2]{FMT} prove the existence of deterministic global classical
 solutions under mass control and slightly superquadratic growth in
 arbitrary dimension, both on $\R^d$ and on smooth bounded domains with
 homogeneous Neumann conditions, as specified in their Assumption~(A1),
@@ -103,7 +103,10 @@ p.~13 of arXiv:2103.16863v2, use mixed multinomial energies with
 coefficients $\prod_i\theta_i^{\alpha_i^2}$, where $\alpha$ is a
 multi-index and $\theta_i>0$ are weights. Their Lemma~2.4, p.~14,
 provides reaction compatibility, and pp.~15--16 establish coercivity for
-unequal diffusion operators. We use a common quadratic exponent together
+unequal diffusion operators. Their systems are deterministic, so the
+It\^o correction from transport noise does not arise there; for a general
+convex mixed polynomial this correction can exceed the diffusion term
+under species-dependent transport (\cref{rem:hessian}). We use a common quadratic exponent together
 with linear weights in the multi-index. The additional estimate here
 controls the stochastic covariance for species-dependent transport; it
 then yields the stochastic global-existence conclusion.
@@ -845,7 +848,7 @@ trace realizations.
 
 \section{Remarks and remaining questions}
 
-\begin{remark}[Why a general mixed Hessian is insufficient]
+\begin{remark}[Why a general mixed Hessian is insufficient]\label{rem:hessian}
 Componentwise stochastic parabolicity does not imply
 \eqref{eq:covariance} for every convex mixed polynomial. Take two
 species, $d=2$, $\nu_1=\nu_2=1$, one Brownian motion, and constant
@@ -937,6 +940,22 @@ checked them. Claude Opus~5.5 (Anthropic) set the problem, compared the
 sources and prepared the text. The author is responsible for the content
 of the paper and for decisions concerning its dissemination.
 
+The results rest on the work of others. The question is Problem~7 of
+Agresti and Veraar~\cite{AVsurvey}, whose survey also states the
+structural hypotheses used here. The local strong solutions, their
+positivity and regularization, and the blow-up criteria of
+Section~\ref{sec:local} are those of Agresti and Veraar~\cite{AVlocal}.
+The polynomial energy follows the mixed multinomial method of
+Fitzgibbon, Morgan, Tang and Yin~\cite{FMTY} for deterministic systems,
+which continues the triangular theory of Morgan~\cite{Morgan89,Morgan90}.
+The paper adds the estimate of Section~\ref{sec:covariance}: a choice
+of the energy's coefficients for which uniform stochastic parabolicity
+controls the full stochastic covariance form, including species-dependent
+transport and correlations between species. With a stopped estimate from
+positive times this gives almost-sure global existence on the torus for
+globally Lipschitz zero-order noise. The whole-space and bounded-domain
+cases and superlinear zero-order noise remain open.
+
 \section*{Data availability}
 No data were generated or analysed for this paper. Related material is at
 \url{https://github.com/yspennstate/stochastic-reaction-diffusion-triangular-transport}.
@@ -958,9 +977,9 @@ The paper is part of the Math Brain project, whose public repository is \url{htt
 \bibitem{Pierre} M.~Pierre, \emph{Global existence in reaction-diffusion systems with control of mass: a survey}, Milan J.\ Math.\ 78 (2010), 417--455, doi:10.1007/s00032-010-0133-4.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
 
-\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/9eb386da3dc67da2fbb4a78a9d97baaaa1f79b9a/papers/math-brain-2026-10-24}.
 
-\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, commit 5629e64, \url{https://github.com/yspennstate/brain-framework-public/tree/5629e644cdd510173ae97e9aa92642dabd22dc57}.
 
 \end{thebibliography}
 \end{document}
